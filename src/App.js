@@ -1,24 +1,24 @@
-import logo from './logo.svg';
+import React from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { PostProvider } from './components/PostContext';
+import PostsDisplayScreen from './components/PostsDisplayScreen';
+import CreatePostScreen from './components/CreatePostScreen';
+import EditPostScreen from './components/EditPostScreen';
 import './App.css';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <PostProvider>
+      <Router>
+        <div className="App">
+          <Routes>
+            <Route path="/" exact element={<PostsDisplayScreen/>} />
+            <Route path="/create-post" element={<CreatePostScreen/>} />
+            <Route path="/edit-post/:id" element={<EditPostScreen/>} />
+          </Routes>
+        </div>
+      </Router>
+    </PostProvider>
   );
 }
 
